@@ -8,6 +8,8 @@ import IndexPage from 'flarum/components/IndexPage';
 import Button from 'flarum/components/Button';
 
 app.initializers.add('flarum-pusher', () => {
+  if (!app.data.session.userId) return;  
+
   const loadPusher = new Promise((resolve) => {
     $.getScript('//cdn.jsdelivr.net/npm/pusher-js@7.0.3/dist/web/pusher.min.js', () => {
       const socket = new Pusher(app.forum.attribute('pusherKey'), {
